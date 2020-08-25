@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { incrementCountAction } from '../store/actions';
 
 const MyHome = (props) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text> HOME PAGE</Text>
             <Text> count currently is : {props.count} </Text>
             <Button title="increment count" onPress={props.incrementCount}/>
@@ -28,3 +28,10 @@ const mapDispatchToProps = (dispatch) => {
 const Home = connect(mapStateToProps, mapDispatchToProps)(MyHome);
 
 export default Home;
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "grey",
+        flex: 1
+    }
+})
