@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import countReducer from "./countReducer";
+import historyReducer from "./historyReducer";
+import favoritesReducer from "./favoritesReducer";
 
 export default combineReducers(
     {
-        count: countReducer
+        history: historyReducer,
+        favorites: favoritesReducer
     }
 )

@@ -1,22 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Vibration } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Camera } from 'expo-camera';
-import { Icon } from 'react-native-elements';
-import { withNavigationFocus } from 'react-navigation';
-import {BarCodeScanner} from 'expo-barcode-scanner';
+import { withNavigationFocus, NavigationActions } from 'react-navigation';
+import { useIsFocused, CommonActions, StackActions } from '@react-navigation/native';
 
 const Scanner = (props) => {
 
     const [hasPermission, setHasPermission] = useState(null);
-    const [loaded, setLoaded] = useState(false);
 
-    props.navigation.addListener('focus', () => {
-        setLoaded(true);
-    });
-    props.navigation.addListener('blur', () => {
-        setLoaded(false);
-    });
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         (async () => {
@@ -27,9 +20,16 @@ const Scanner = (props) => {
     }, []);
 
     const onBarCodeScanned = (object) => {
-        props.navigation.navigate('Details', {
-            data: object.data
-        })
+        Vibration.vibrate();
+        props.navigation.dispatch(
+            CommonActions.navigate({
+                name: 'Details',
+                params: {
+                    data: object.data
+                },
+                key: Math.random()*10000
+            })
+        )
     }
 
     if (hasPermission === null) {
@@ -41,13 +41,13 @@ const Scanner = (props) => {
     return (
         <View>
             {
-                loaded && 
-                <Camera 
-                    style={{ height: 400, width: "100%" }} 
+                isFocused &&
+                <Camera
+                    style={{ height: 400, width: "100%" }}
                     type={Camera.Constants.Type.back}
                     onBarCodeScanned={onBarCodeScanned}
 
-                    ></Camera>
+                ></Camera>
             }
         </View>
     );

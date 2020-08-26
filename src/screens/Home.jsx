@@ -1,27 +1,35 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { incrementCountAction } from '../store/actions';
+import { fetchHistoryAction } from '../store/actions';
+import { useEffect } from 'react';
 
 const MyHome = (props) => {
+
+    useEffect(props.fetchHistory, []);
+
     return (
         <View style={styles.container}>
             <Text> HOME PAGE</Text>
-            <Text> count currently is : {props.count} </Text>
-            <Button title="increment count" onPress={props.incrementCount}/>
+            <FlatList
+                data={props.history}
+                keyExtractor={(item, id) => id+""}
+                renderItem={({ item }) => <Text style={{margin: 10, backgroundColor: "yellow"}} >{item}</Text>}
+            />
+
         </View>
     );
 };
 
 const mapStateToProps = (state) => {
     return {
-        count: state.count
+        history: state.history
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        incrementCount: () => dispatch(incrementCountAction())
+        fetchHistory: () => fetchHistoryAction(dispatch)
     }
 }
 
@@ -31,7 +39,7 @@ export default Home;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "grey",
+        backgroundColor: "#eee",
         flex: 1
     }
 })

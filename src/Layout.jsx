@@ -7,6 +7,8 @@ import Scanner from './screens/Scanner';
 import { Icon } from 'react-native-elements';
 import {createStackNavigator} from '@react-navigation/stack';
 import ProductDetails from './screens/ProductDetails';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Favorites from './screens/Favorites';s
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,8 +16,13 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home}/>
-            <Stack.Screen name="Details" component={ProductDetails}/>
+            <Stack.Screen name="Home" component={Home} 
+                options={{
+                        title: "YUKA CLONE",
+                        headerTintColor: "white",
+                        headerStyle: {backgroundColor: "black"}
+                    }}/>
+            <Stack.Screen name="Details" component={ProductDetails} options={{title: "Details"}}/>
         </Stack.Navigator>
     );
 }
@@ -23,9 +30,9 @@ const HomeStack = () => {
 const Layout = (props) => {
     return (
         <>
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <Text>{props.route}</Text>
-            </View>
+            </SafeAreaView>
             <NavigationContainer>
                 <Tab.Navigator>
                     <Tab.Screen
@@ -46,17 +53,9 @@ const Layout = (props) => {
                     />
                     <Tab.Screen
                         name="Favorites"
-                        component={Home}
+                        component={Favorites}
                         options={{
-                            tabBarIcon: () => <Icon name="home" size={30} type="material" />,
-
-                        }}
-                    />
-                    <Tab.Screen
-                        name="History"
-                        component={Home}
-                        options={{
-                            tabBarIcon: () => <Icon name="home" size={30} type="material" />,
+                            tabBarIcon: () => <Icon name="star" size={30} type="material" />,
 
                         }}
                     />
@@ -70,6 +69,5 @@ export default Layout;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: StatusBar.currentHeight
     }
 });
