@@ -9,10 +9,13 @@ const DateComponent = (props) => {
     const [dateTaken, setDateTaken] = useState(null);
 
     useEffect(() => {
-        setDateTaken(dateToString());
-        setInterval(() => {
+        if (props.date) {
             setDateTaken(dateToString());
-        }, 31000)
+            const unsubscribe = props.navigation.addListener('focus', () => {
+                setDateTaken(dateToString());
+            });
+            return unsubscribe;
+        }
     }, []);
 
     const dateToString = () => {

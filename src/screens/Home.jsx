@@ -7,7 +7,14 @@ import ProductThumb from '../components/ProductThumb';
  
 const MyHome = (props) => {
 
-    useEffect(props.fetchHistory, []);
+    useEffect(()=> {
+        props.fetchHistory();
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            props.fetchHistory();
+        });
+
+        return unsubscribe;
+    }, []);
 
     return (
         <View style={styles.container}>

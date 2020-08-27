@@ -9,22 +9,21 @@ import { CommonActions } from '@react-navigation/native';
 
 const ProductThumb = (props) => {
 
-    const currentProduct = props.product;
-
     const clickHandler = () => {
+        const productWithoutDate = {...props.product};
+        delete productWithoutDate.date;
         props.navigation.dispatch(
             CommonActions.navigate({
                 name: 'Details',
                 params: {
-                    product: currentProduct
+                    product: productWithoutDate
                 }
             })
         );
     }
 
-    const { date } = currentProduct;
     let dateJSX = <></>;
-    if (date) {
+    if (props.product.date) {
         dateJSX = (<View></View>);
     }
 
@@ -32,14 +31,14 @@ const ProductThumb = (props) => {
         <>
             <TouchableOpacity onPress={clickHandler}>
                 <View style={styles.container}>
-                    <Image style={styles.image} source={{ uri: currentProduct.image_front_thumb_url }} />
+                    <Image style={styles.image} source={{ uri: props.product.image_front_thumb_url }} />
                     <View style={styles.right}>
                         <View style={styles.product}>
-                            <Text style={styles.productName}>{currentProduct.product_name}</Text>
-                            <Text style={styles.brandName}>{currentProduct.brands}</Text>
+                            <Text style={styles.productName}>{props.product.product_name}</Text>
+                            <Text style={styles.brandName}>{props.product.brands}</Text>
                         </View>
-                        <Rating grade={currentProduct.nutrition_grades} />
-                        {date ? <DateComponent date={date} /> : <></>}
+                        <Rating grade={props.product.nutrition_grades} />
+                        {props.product.date ? <DateComponent navigation={props.navigation} date={props.product.date} /> : <></>}
                     </View>
                     <View style={styles.icon}>
                         <Icon name="trash-alt" type="font-awesome-5" color="red" raised reverse

@@ -60,16 +60,19 @@ const Scanner = (props) => {
         <View>
             {
                 isFocused &&
-                <Camera
-                    style={{ height: 400, width: "100%" }}
-                    type={Camera.Constants.Type.back}
-                    onBarCodeScanned={isScanned ? undefined : onBarCodeScanned}
-                    flashMode={isFlashOn ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
-                >
+                <>
+                    <Camera
+                        style={{ height: 400, width: "100%" }}
+                        type={Camera.Constants.Type.back}
+                        onBarCodeScanned={isScanned ? undefined : onBarCodeScanned}
+                        flashMode={isFlashOn ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
+                    >
+
+                    </Camera>
                     <View>
                         <Button title="flash" onPress={onFlashHandler} />
                     </View>
-                </Camera>
+                </>
             }
         </View>
     );
