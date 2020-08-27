@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchHistoryAction } from '../store/actions';
+import { fetchHistoryAction, deleteFromHistoryAction } from '../store/actions/HistoryActions';
 import { useEffect } from 'react';
-
+import ProductThumb from '../components/ProductThumb';
+ 
 const MyHome = (props) => {
 
     useEffect(props.fetchHistory, []);
 
     return (
         <View style={styles.container}>
-            <Text> HOME PAGE</Text>
             <FlatList
                 data={props.history}
-                keyExtractor={(item, id) => id+""}
-                renderItem={({ item }) => <Text style={{margin: 10, backgroundColor: "yellow"}} >{item}</Text>}
+                keyExtractor={(item, id) => id + ""}
+                renderItem={({ item }) => <ProductThumb {...props} product={item} onDelete={() => props.deleteFromHistory(item.code)}/>}
             />
-
         </View>
     );
 };
@@ -29,7 +28,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchHistory: () => fetchHistoryAction(dispatch)
+        fetchHistory: () => fetchHistoryAction(dispatch),
+        deleteFromHistory: (code) => dispatch(deleteFromHistoryAction(code))
     }
 }
 

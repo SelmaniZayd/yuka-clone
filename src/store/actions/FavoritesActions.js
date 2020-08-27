@@ -1,10 +1,14 @@
+import { AsyncStorage } from "react-native";
+
+
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const SET_FAVORITES = "SET_FAVORITES";
+export const DELETE_FROM_FAVORITES = "DELETE_FROM_FAVORITES";
 
-export const addToFavoritesAction = (code) => {
+export const addToFavoritesAction = (product) => {
     return {
         type: ADD_TO_FAVORITES,
-        code
+        product
     }
 }
 
@@ -16,14 +20,23 @@ export const setFavoritesAction = (favorites) => {
 }
 
 export const fetchFavoritesAction = (dispatch) => {
-    async () => {
-        try {
-            const myArray = await AsyncStorage.getItem("favorites");
-            if (myArray) {
-                dispatch(setHistoryAction(JSON.parse(myArray)));
-            }
-        } catch (error) {
-            console.log(error);
+    asyncStorageGetFavorites(dispatch);
+}
+
+const asyncStorageGetFavorites = async (dispatch) => {
+    try {
+        const myArray = await AsyncStorage.getItem('favorites');
+        if (myArray) {
+            dispatch(setFavoritesAction(JSON.parse(myArray)));
         }
+    } catch (error) {
+        console.log(error);
     }
 }
+
+export const deleteFromFavoritesAction = (code) => {
+    return {
+        type: DELETE_FROM_FAVORITES,
+        code
+    }
+} 

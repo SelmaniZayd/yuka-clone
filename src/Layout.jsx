@@ -5,10 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Scanner from './screens/Scanner';
 import { Icon } from 'react-native-elements';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import ProductDetails from './screens/ProductDetails';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Favorites from './screens/Favorites';s
+import Favorites from './screens/Favorites';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -16,13 +16,26 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} 
+            <Stack.Screen name="Home" component={Home}
                 options={{
-                        title: "YUKA CLONE",
-                        headerTintColor: "white",
-                        headerStyle: {backgroundColor: "black"}
-                    }}/>
-            <Stack.Screen name="Details" component={ProductDetails} options={{title: "Details"}}/>
+                    title: "YUKA CLONE",
+                    headerTintColor: "white",
+                    headerStyle: { backgroundColor: "black" }
+                }} />
+            <Stack.Screen name="Details" component={ProductDetails} options={{ title: "Details" }} />
+        </Stack.Navigator>
+    );
+}
+
+const FavoritesStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Favorites" component={Favorites}
+                options={{
+                    title: "Favorites",
+                    headerTintColor: "red",
+                    headerStyle: { backgroundColor: "white" }
+                }} />
         </Stack.Navigator>
     );
 }
@@ -39,8 +52,7 @@ const Layout = (props) => {
                         name="Home"
                         component={HomeStack}
                         options={{
-                            tabBarIcon: () => <Icon name="home" size={30} type="material"/>,
-
+                            tabBarIcon: () => <Icon name="home" size={30} type="material" />,
                         }}
                     />
                     <Tab.Screen
@@ -48,15 +60,13 @@ const Layout = (props) => {
                         component={Scanner}
                         options={{
                             tabBarIcon: () => <Icon name="qrcode" size={30} type="font-awesome" />,
-
                         }}
                     />
                     <Tab.Screen
                         name="Favorites"
-                        component={Favorites}
+                        component={FavoritesStack}
                         options={{
-                            tabBarIcon: () => <Icon name="star" size={30} type="material" />,
-
+                            tabBarIcon: () => <Icon name="star" size={30} type="material" />
                         }}
                     />
                 </Tab.Navigator>

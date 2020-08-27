@@ -46,7 +46,7 @@ const Rating = (props) => {
 
     return (
         <View style={styles.container}>
-            <Icon style={styles.icon} name="circle" type="font-awesome" color={getColor()}/>
+            <Icon size={20} style={styles.icon} name="circle" type="font-awesome" color={getColor()}/>
             <Text style={styles.rating}>{getRating()}</Text>
         </View>
     );
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     rating: {
         fontWeight: "bold",
-        fontSize: 17
+        fontSize: 15
     }
 
 });

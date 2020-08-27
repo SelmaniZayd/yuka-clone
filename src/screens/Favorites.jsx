@@ -1,8 +1,9 @@
 import React from 'react';
-import { fetchFavoritesAction } from '../store/actions/FavoritesActions';
+import { fetchFavoritesAction, deleteFromFavoritesAction } from '../store/actions/FavoritesActions';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
+import ProductThumb from '../components/ProductThumb';
 
 const Favorites = (props) => {
 
@@ -11,14 +12,13 @@ const Favorites = (props) => {
     return (
         
         <View style={styles.container}>
-        <Text> Favorties PAGE</Text>
-        <FlatList
-            data={props.favorites}
-            keyExtractor={(item, id) => id + ""}
-            renderItem={({ item }) => <Text>{item}</Text>}
-        />
+            <FlatList
+                data={props.favorites}
+                keyExtractor={(item, id) => id + ""}
+                renderItem={({ item }) => <ProductThumb {...props} product={item} onDelete={() => props.deleteFromFavorites(item.code)}/>}
+            />
+        </View>
 
-    </View>
     );
 };
 
@@ -30,7 +30,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFavorites: () => fetchFavoritesAction(dispatch)
+        fetchFavorites: () => fetchFavoritesAction(dispatch),
+        deleteFromFavorites: (code) =>  dispatch(deleteFromFavoritesAction(code))
     }
 }
 

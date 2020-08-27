@@ -19,7 +19,7 @@ const ProductDetailsHeader = (props) => {
             </View>
             <View style={styles.icon}>
                 <Icon name="star" type="font-awesome-5" color="pink" raised reverse
-                    onPress={() => props.addToFavorites(props.product.code)}
+                    onPress={() => props.addToFavorites(props.product)}
                 />
             </View>
         </View>
@@ -28,7 +28,7 @@ const ProductDetailsHeader = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToFavorites: (code) => dispatch(addToFavoritesAction(code))
+        addToFavorites: (product) => dispatch(addToFavoritesAction(product))
     }
 }
 
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         height: "100%",
         justifyContent: "space-between",
         paddingTop: 15,
-        paddingBottom: 15
+        paddingBottom: 15,
+        width: '62%'
     },
     product: {
 
