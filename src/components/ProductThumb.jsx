@@ -1,9 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, Alert, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Rating from './Rating';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import DateComponent from './DateComponent';
 import { CommonActions } from '@react-navigation/native';
 

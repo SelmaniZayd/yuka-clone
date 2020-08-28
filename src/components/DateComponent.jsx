@@ -16,7 +16,7 @@ const DateComponent = (props) => {
             });
             return unsubscribe;
         }
-    }, []);
+    }, [props.date]);
 
     const dateToString = () => {
         let seconds = Math.floor((new Date() - props.date) / 1000);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import Home from './screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,7 +22,7 @@ const HomeStack = () => {
                     headerTintColor: "black",
                     headerStyle: { backgroundColor: "#d6d6d6" }
                 }} />
-            <Stack.Screen name="Details" component={ProductDetails} options={{ title: "Details" }} />
+            <Stack.Screen name="Details" component={ProductDetails} options={{ title: "Details", headerStyle: { backgroundColor: "#d6d6d6"} }} />
         </Stack.Navigator>
     );
 }

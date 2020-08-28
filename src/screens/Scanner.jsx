@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Vibration } from 'react-native';
+import { View, Text, Vibration } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Camera } from 'expo-camera';
-import { withNavigationFocus, NavigationActions, SafeAreaView } from 'react-navigation';
-import { useIsFocused, CommonActions, StackActions } from '@react-navigation/native';
-import { Button, Icon } from 'react-native-elements';
+import { withNavigationFocus, SafeAreaView } from 'react-navigation';
+import { useIsFocused, CommonActions } from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { addToHistoryAction } from '../store/actions/HistoryActions';
 import { StyleSheet } from 'react-native';

@@ -15,7 +15,7 @@ const favoritesReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_TO_FAVORITES:
             const newState = state.slice();
-            const existAlready = newState.find((value, id) => value.code === action.code);
+            const existAlready = newState.find((value, id) => value.code === action.product.code);
             if (existAlready) {
                 return newState;
             }

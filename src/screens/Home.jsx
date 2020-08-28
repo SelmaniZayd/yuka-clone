@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchHistoryAction, deleteFromHistoryAction } from '../store/actions/HistoryActions';
 import { useEffect } from 'react';
