@@ -19,8 +19,8 @@ const HomeStack = () => {
             <Stack.Screen name="Home" component={Home}
                 options={{
                     title: "YUKA CLONE",
-                    headerTintColor: "white",
-                    headerStyle: { backgroundColor: "black" }
+                    headerTintColor: "black",
+                    headerStyle: { backgroundColor: "#d6d6d6" }
                 }} />
             <Stack.Screen name="Details" component={ProductDetails} options={{ title: "Details" }} />
         </Stack.Navigator>
@@ -33,8 +33,8 @@ const FavoritesStack = () => {
             <Stack.Screen name="Favorites" component={Favorites}
                 options={{
                     title: "Favorites",
-                    headerTintColor: "red",
-                    headerStyle: { backgroundColor: "white" }
+                    headerTintColor: "black",
+                    headerStyle: { backgroundColor: "#d6d6d6" }
                 }} />
         </Stack.Navigator>
     );
