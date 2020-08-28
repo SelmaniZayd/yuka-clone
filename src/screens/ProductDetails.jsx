@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import ProductDetailsHeader from '../components/ProductDetailsHeader';
+import ProductDetailsNutriments from '../components/ProductDetailsNutriments';
 
 
 const ProductDetails = (props) => {
 
     const productJSX = (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <ProductDetailsHeader product={props.route.params.product} />
-        </View>);
+            <ProductDetailsNutriments product={props.route.params.product} />
+        </ScrollView>);
 
     return (
         <View style={styles.container}>
@@ -24,7 +26,7 @@ export default ProductDetails;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "red",
+        backgroundColor: "#dbdbdb"
     },
 
 })

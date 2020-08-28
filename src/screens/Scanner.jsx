@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { Camera } from 'expo-camera';
 import { withNavigationFocus, NavigationActions } from 'react-navigation';
 import { useIsFocused, CommonActions, StackActions } from '@react-navigation/native';
-import { Button } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { addToHistoryAction } from '../store/actions/HistoryActions';
+import { StyleSheet } from 'react-native';
 
 const Scanner = (props) => {
 
@@ -57,21 +58,21 @@ const Scanner = (props) => {
         return <Text>No access to camera</Text>;
     }
     return (
-        <View>
+        <View style={styles.container}>
             {
                 isFocused &&
                 <>
                     <Camera
-                        style={{ height: 400, width: "100%" }}
+                        style={styles.camera}
                         type={Camera.Constants.Type.back}
                         onBarCodeScanned={isScanned ? undefined : onBarCodeScanned}
                         flashMode={isFlashOn ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                     >
-
+                        <View style={styles.flashButton}>
+                            <Icon name={isFlashOn ? "flash-on" : "flash-off"} type="material" size={32} color="yellow" onPress={onFlashHandler}/>
+                        </View>
+                        
                     </Camera>
-                    <View>
-                        <Button title="flash" onPress={onFlashHandler} />
-                    </View>
                 </>
             }
         </View>
@@ -85,3 +86,19 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(withNavigationFocus(Scanner));
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    camera: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
+    },
+    flashButton: {
+        position: "absolute",
+        top: 30,
+        right: 30
+    }
+})
