@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Vibration } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Camera } from 'expo-camera';
-import { withNavigationFocus, NavigationActions } from 'react-navigation';
+import { withNavigationFocus, NavigationActions, SafeAreaView } from 'react-navigation';
 import { useIsFocused, CommonActions, StackActions } from '@react-navigation/native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -58,7 +58,7 @@ const Scanner = (props) => {
         return <Text>No access to camera</Text>;
     }
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {
                 isFocused &&
                 <>
@@ -69,13 +69,26 @@ const Scanner = (props) => {
                         flashMode={isFlashOn ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                     >
                         <View style={styles.flashButton}>
-                            <Icon name={isFlashOn ? "flash-on" : "flash-off"} type="material" size={32} color="yellow" onPress={onFlashHandler}/>
+                            <Icon name={isFlashOn ? "flash-on" : "flash-off"} type="material" size={32} color="yellow" onPress={onFlashHandler} />
                         </View>
-                        
+
+                        <View style={styles.overlay}>
+                            <View style={styles.top}>
+                                <View style={styles.secondTop}></View>
+                            </View>
+                            <View style={styles.middle}>
+                                <View style={styles.left}></View>
+                                <View style={styles.right}></View>
+                            </View>
+                            <View style={styles.bottom}>
+                                <View style={styles.secondBottom}></View>
+                            </View>
+                        </View>
+
                     </Camera>
                 </>
             }
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -88,6 +101,9 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(null, mapDispatchToProps)(withNavigationFocus(Scanner));
 
 const styles = StyleSheet.create({
+    overlay: {
+        flex: 1
+    },
     container: {
         flex: 1
     },
@@ -100,5 +116,51 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 30,
         right: 30
+    },
+    top: {
+        height: 180,
+        width: "100%",
+        backgroundColor: "black",
+        opacity: 0.5,
+    },
+    middle: {
+        flexDirection: "row",
+        width: "100%",
+        flex: 1,
+        justifyContent: "space-between"
+    },
+    bottom: {
+        backgroundColor: "black",
+        width: "100%",
+        height: 180,
+        opacity: 0.5,
+    },
+    left: {
+        width: 50,
+        height: "100%",
+        backgroundColor: "black",
+        borderRightWidth: 2,
+        borderRightColor: "white",
+        opacity: 0.5,
+    },
+    right: {
+        width: 50,
+        height: "100%",
+        backgroundColor: "black",
+        borderLeftWidth: 2,
+        borderLeftColor: "white",
+        opacity: 0.5,
+    },
+    secondTop: {
+        borderBottomWidth: 2,
+        borderBottomColor: "white",
+        flex: 1,
+        marginHorizontal: 50
+    },
+    secondBottom: {
+        borderTopWidth: 2,
+        borderTopColor: "white",
+        flex: 1,
+        marginHorizontal: 50
     }
 })
